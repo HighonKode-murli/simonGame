@@ -4,7 +4,7 @@ $(document).ready(function () {
   var gameSeq = [];
 
   $(".start").click(function () {
-    $(".start").animate({ opacity: 0.2 }).animate({ opacity: 0 });
+    $(".start").animate({ opacity: 0.2 },100).animate({ opacity: 0 },50);
     gameStart();
   });
 
@@ -55,15 +55,15 @@ $(document).ready(function () {
       if (i >= seq.length) {
         clearInterval(interval);
       }
-    }, 1000);
+    }, 500);
   }
 
   $(".btn").click(function () {
     var buttonId = parseInt(this.getAttribute("id"));
     userGameSeq.push(buttonId);
     $("#" + buttonId)
-      .animate({ opacity: 0.5 })
-      .animate({ opacity: 1 });
+      .animate({ opacity: 0.5 },100)
+      .animate({ opacity: 1 },100);
     playSound(buttonId);
     if (checkSeq() === false) {
       endGame();
@@ -84,15 +84,22 @@ $(document).ready(function () {
 
   function endGame() {
     level = 1;
+    gameSeq = [];
+
     $("h1").addClass("normalh1");
     $("h1").text("Game Over");
+    $("body").addClass("game-over");
+    setTimeout(function(){
+    $("body").removeClass("game-over");
+
+    },200);
     $("h1").animate({ opacity: 0.5 }).animate({ opacity: 1 });
     var audio = new Audio("./sounds/wrong.mp3");
     audio.play();
     setTimeout(function () {
       $(".start").text("Restart");
       $(".start").addClass("restart");
-      $(".start").animate({ opacity: 0.5 }).animate({ opacity: 1 });
+      $(".start").animate({ opacity: 0.5 },100).animate({ opacity: 1 },100);
     }, 1000);
   }
 });
