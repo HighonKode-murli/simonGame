@@ -78,7 +78,10 @@ footer{
     background-color:chocolate;
 }
 
-
+.game-over {
+    background-color: red;
+    opacity: 0.8;
+  }
 
 @media screen and (max-width:750px){
     .start{
